@@ -137,8 +137,8 @@
 
     <!-- Buttons -->
     <div class="d-flex justify-content-between">
-        <button class="btn btn-back" href="product.html">Back</button>
-        <button class="btn btn-continue" href="paymentDone.html">Continue</button>
+        <button class="btn btn-back" id="backBtn">Back</button>
+        <button class="btn btn-continue" id="continueBtn">Continue</button>
     </div>
 </div>
 
@@ -146,6 +146,17 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- JavaScript for Navigation -->
+<script>
+    document.getElementById('continueBtn').addEventListener('click', function() {
+        window.location.href = 'paymentDone.html'; // Redirects to Payment Successful page
+    });
+
+    document.getElementById('backBtn').addEventListener('click', function() {
+        window.location.href = 'shoping-cart.html'; // Redirects to Shopping Cart page
+    });
+</script>
 
 </body>
 </html>
