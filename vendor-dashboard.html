@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            margin: 0;
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+        .navbar-brand, .nav-link, .profile-name {
+            color: #fff !important;
+        }
+        .dashboard-container {
+            display: flex;
+            gap: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+        .product-list, .add-product-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .product-list {
+            flex: 2;
+        }
+        .add-product-form {
+            flex: 1;
+        }
+        .btn-add {
+            background-color: #007bff;
+            color: white;
+            border-radius: 20px;
+        }
+        .product-card {
+            margin-bottom: 20px;
+        }
+        .product-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .product-desc {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        .product-images img {
+            max-width: 150px;
+            height: auto;
+            margin: 5px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .profile-dropdown {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar with Profile -->
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="#">Vendor Dashboard</a>
+    <div class="ml-auto profile-dropdown dropdown">
+        <a class="nav-link dropdown-toggle profile-name" href="#" id="profileDropdown" role="button" data-toggle="dropdown">
+            Vendor Profile
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#">My Profile</a>
+            <a class="dropdown-item" href="#">Settings</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="login.html">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Dashboard Content -->
+<div class="dashboard-container">
+    <!-- Existing Products -->
+    <div class="product-list">
+        <h3 class="text-center mb-4">My Products</h3>
+
+        <!-- Preloaded Product -->
+        <div class="card product-card">
+            <div class="card-body">
+                <h5 class="product-title">Sample T-Shirt</h5>
+                <p class="product-desc">Comfortable cotton t-shirt available in various sizes.</p>
+                <div class="product-images">
+                    <img src="https://via.placeholder.com/150" alt="Sample T-Shirt Image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add New Product Form -->
+    <div class="add-product-form">
+        <h4 class="text-center mb-3">Add New Product</h4>
+
+        <!-- Product Form -->
+        <form id="productForm">
+            <div class="form-group">
+                <label for="productName">Product Name:</label>
+                <input type="text" class="form-control" id="productName" placeholder="Enter product name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="productDesc">Description:</label>
+                <textarea class="form-control" id="productDesc" rows="3" placeholder="Enter product description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="productImages">Upload Images:</label>
+                <input type="file" class="form-control-file" id="productImages" multiple accept="image/*">
+            </div>
+
+            <button type="submit" class="btn btn-add btn-block">Add Product</button>
+        </form>
+    </div>
+</div>
+
+<!-- Bootstrap JS and Dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- JavaScript for Adding Products with Images -->
+<script>
+    document.getElementById('productForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent page reload
+
+        // Get input values
+        const productName = document.getElementById('productName').value;
+        const productDesc = document.getElementById('productDesc').value;
+        const productImages = document.getElementById('productImages').files;
+
+        // Create image elements for each uploaded image
+        let imageElements = '';
+        for (let i = 0; i < productImages.length; i++) {
+            const imgSrc = URL.createObjectURL(productImages[i]);
+            imageElements += `<img src="${imgSrc}" alt="Product Image">`;
+        }
+
+        // Create new product card with images
+        const productCard = `
+            <div class="card product-card">
+                <div class="card-body">
+                    <h5 class="product-title">${productName}</h5>
+                    <p class="product-desc">${productDesc}</p>
+                    <div class="product-images">${imageElements}</div>
+                </div>
+            </div>
+        `;
+
+        // Add product card to the product list
+        document.querySelector('.product-list').innerHTML += productCard;
+
+        // Clear the form after adding the product
+        document.getElementById('productForm').reset();
+    });
+
+    // Redirect based on user role
+    document.addEventListener('DOMContentLoaded', function() {
+        const userRole = localStorage.getItem('userRole');
+        if (userRole === 'vendor') {
+            window.location.href = 'vendor-dashboard.html';
+        } else if (userRole === 'customer') {
+            window.location.href = 'customer-dashboard.html';
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Login</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -69,9 +69,9 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                Sign Up
+                Login
             </div>
-            <form id="signupForm">
+            <form id="loginForm">
                 <!-- Username -->
                 <div class="form-group">
                     <label for="username">Username</label>
@@ -84,66 +84,40 @@
                     <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
                 </div>
 
-                <!-- Confirm Password -->
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
-                    <small id="passwordHelp" class="form-text text-muted">Make sure both passwords match.</small>
-                </div>
-
-                <!-- Role Selection -->
-                <div class="form-group">
-                    <label for="role">Sign up as:</label>
-                    <select class="form-control" id="role" required>
-                        <option value="customer">Customer</option>
-                        <option value="vendor">Vendor</option>
-                    </select>
-                </div>
-
                 <!-- Error Message -->
                 <div class="alert alert-danger" id="errorMessage" role="alert">
-                    Passwords do not match. Please try again.
+                    Invalid Username or Password. Please try again.
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
-            <p class="text-center mt-3">Already have an account? 
-                <a href="login.html">Login here</a>
-            </p>
+            <p class="text-center mt-3">Don't have an account? <a href="signup.html">Sign Up here</a></p>
         </div>
     </div>
 
     <script>
-        document.getElementById("signupForm").addEventListener("submit", function (event) {
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
             event.preventDefault();
 
             // Get form values
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
-            const confirmPassword = document.getElementById("confirmPassword").value;
-            const role = document.getElementById("role").value;
 
-            // Validate if passwords match
-            if (password !== confirmPassword) {
-                // Show error message if passwords don't match
-                document.getElementById("errorMessage").style.display = "block";
-                return;
-            }
+            // Get user data from localStorage
+            const userData = JSON.parse(localStorage.getItem("user"));
 
-            // Hide error message if passwords match
-            document.getElementById("errorMessage").style.display = "none";
-
-            // Simulating user data storage in localStorage
-            localStorage.setItem("user", JSON.stringify({ username, password, role }));
-
-            alert("Sign Up Successful! Please proceed to Login.");
-
-            // Redirect based on role
-            if (role === "vendor") {
-                window.location.href = "vendorLogin.html";  // Redirect to vendor login page
+            // Check if the username and password match the stored data
+            if (userData && userData.username === username && userData.password === password) {
+                // Redirect based on user role
+                if (userData.role === "customer") {
+                    window.location.href = "mainpage.html";  // Redirect to customer page
+                } else if (userData.role === "vendor") {
+                    window.location.href = "vendor-dashboard.html";  // Redirect to vendor page
+                }
             } else {
-                window.location.href = "login.html";  // Redirect to customer login page
+                // Show error message if login fails
+                document.getElementById("errorMessage").style.display = "block";
             }
         });
     </script>
