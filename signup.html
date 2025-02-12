@@ -134,16 +134,16 @@
             // Hide error message if passwords match
             document.getElementById("errorMessage").style.display = "none";
 
-            // Simulating user data storage in localStorage
+            
             localStorage.setItem("user", JSON.stringify({ username, password, role }));
 
             alert("Sign Up Successful! Please proceed to Login.");
 
-            // Redirect based on role
+            
             if (role === "vendor") {
-                window.location.href = "vendorLogin.html";  // Redirect to vendor login page
+                window.location.href = "vendorLogin.html";  
             } else {
-                window.location.href = "login.html";  // Redirect to customer login page
+                window.location.href = "login.html";  
             }
         });
     </script>
