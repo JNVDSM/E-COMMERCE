@@ -661,9 +661,10 @@
                                 type="submit"
                                 class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"
                                 id="checkoutBtn"
-                                href="payment.html"
-                            >
+                                
+                            ><a href="payment.html">
                                 Proceed to Checkout
+                                </a>
                             </button>
                         </div>
                     </div>
@@ -924,13 +925,14 @@
 
             $("#checkoutBtn").click(function (e) {
                 e.preventDefault();
-                swal({
-                    title: "Payment Successful!",
-                    text: "Redirecting to Coza Store...",
-                    icon: "success",
-                    button: false,
-                    timer: 2000,
-                });
+                // swal({
+                    // title: "Payment Successful!",
+                    // text: "Redirecting to Coza Store...",
+                    // icon: "success",
+                    // button: false,
+                    // timer: 2000,
+                    window.location.href="/payment.html";
+                // });
 
                 setTimeout(function () {
                     window.location.href = "/index.html";
