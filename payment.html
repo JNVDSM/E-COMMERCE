@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compact Payment Screen</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .payment-container {
+            width: 360px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .btn-continue {
+            background-color: #28a745;
+            color: white;
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+        .btn-back {
+            background-color: #dc3545;
+            color: white;
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+        .form-section {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            border-radius: 8px;
+            font-size: 14px;
+            padding: 6px 10px;
+        }
+        h5 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        label {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="payment-container">
+    <h2 class="text-center">Payment Details</h2>
+
+    <!-- Product Details -->
+    <div class="form-section">
+        <h5>Product Details</h5>
+        <div class="form-group">
+            <label for="productSize">Size:</label>
+            <select class="form-control" id="productSize">
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+                <option>Extra Large</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="productQuantity">Quantity:</label>
+            <input type="number" class="form-control" id="productQuantity" value="1" min="1">
+        </div>
+        <div class="form-group">
+            <label>Total: ₹999</label>
+        </div>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="form-section">
+        <h5>Payment Method</h5>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" data-toggle="collapse" data-target="#creditCardDetails" checked>
+            <label class="form-check-label" for="creditCard">Credit Card</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="paymentMethod" id="debitCard" data-toggle="collapse" data-target="#debitCardDetails">
+            <label class="form-check-label" for="debitCard">Debit Card</label>
+        </div>
+    </div>
+
+    <!-- Credit Card Details -->
+    <div id="creditCardDetails" class="collapse show form-section" data-parent=".payment-container">
+        <h5>Credit Card Details</h5>
+        <div class="form-group">
+            <label for="creditCardNumber">Card Number:</label>
+            <input type="text" class="form-control" id="creditCardNumber" placeholder="XXXX-XXXX-XXXX-XXXX">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="creditExpiryDate">Expiry:</label>
+                <input type="text" class="form-control" id="creditExpiryDate" placeholder="MM/YY">
+            </div>
+            <div class="form-group col-6">
+                <label for="creditCVV">CVV:</label>
+                <input type="password" class="form-control" id="creditCVV" placeholder="XXX">
+            </div>
+        </div>
+    </div>
+
+    <!-- Debit Card Details -->
+    <div id="debitCardDetails" class="collapse form-section" data-parent=".payment-container">
+        <h5>Debit Card Details</h5>
+        <div class="form-group">
+            <label for="debitCardNumber">Card Number:</label>
+            <input type="text" class="form-control" id="debitCardNumber" placeholder="XXXX-XXXX-XXXX-XXXX">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="debitExpiryDate">Expiry:</label>
+                <input type="text" class="form-control" id="debitExpiryDate" placeholder="MM/YY">
+            </div>
+            <div class="form-group col-6">
+                <label for="debitCVV">CVV:</label>
+                <input type="password" class="form-control" id="debitCVV" placeholder="XXX">
+            </div>
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-between">
+        <button class="btn btn-back" href="product.html">Back</button>
+        <button class="btn btn-continue" href="paymentDone.html">Continue</button>
+    </div>
+</div>
+
+<!-- Bootstrap JS and Dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
